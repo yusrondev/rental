@@ -70,6 +70,8 @@ $(function () {
         $('.description').val('');
         $('.status').val('');
 
+        CKEDITOR.instances.ckeditor.setData('');
+
         $('.bootstrap-wysihtml5-insert-link-modal').remove();
         $('.bootstrap-wysihtml5-insert-image-modal').remove();
 
