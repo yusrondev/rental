@@ -18,7 +18,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/dist/css/skins/_all-skins.min.css">
-
   <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -29,6 +28,24 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+<style>
+  .table.dataTable.no-footer{
+    border-bottom: 1px solid #e1e1e1;
+  }
+  .modal-full { 
+    width: 80%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .modal-full .modal-content {
+    height: auto;
+  }
+
+  .mt-2{
+    margin-top: 20px !important;
+  }
+</style>
 <body class="hold-transition skin-purple sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -208,6 +225,7 @@
 <script src="{{ asset("back-office") }}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset("back-office") }}/dist/js/demo.js"></script>
+<script src="{{ asset("back-office") }}/ckeditor/ckeditor.js"></script>
 <script src="{{ asset("global") }}/js/swal-helper.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -231,7 +249,10 @@
         $(this).parents().find('.treeview').addClass('active');
       }
   });
+
+  CKEDITOR.replace('ckeditor')
 </script>
+
 @stack('js')
 
 </body>

@@ -14,13 +14,14 @@
     </div>
 </div>
 <div class="box-body">
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="width:100%;">
         <thead>
             <tr>
                 <th>No</th>
                 <th>Nama</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Deskripsi</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -29,7 +30,7 @@
 
     <!-- dynamic modal -->
     <div class="modal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-full mt-2" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <b class="title-modal">...</b>
@@ -51,6 +52,10 @@
                         <div class="form-group">
                             <label class="form-label">Longitude</label>
                             <input type="text" class="form-control longitude" name="longitude">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea name="description" id="ckeditor" class="description" cols="30" rows="10"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>

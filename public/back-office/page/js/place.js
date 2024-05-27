@@ -9,6 +9,7 @@ $(function () {
             { data: 'name', name: 'name' },
             { data: 'latitude', name: 'latitude' },
             { data: 'longitude', name: 'longitude' },
+            { data: 'description_place', name: 'description_place' },
             { data: 'type_status', name: 'type_status' },
             { data: 'action', name: 'action' },
         ]
@@ -37,16 +38,23 @@ $(function () {
         const name = $(this).data('name');
         const latitude = $(this).data('latitude');
         const longitude = $(this).data('longitude');
+        const description = $(this).data('description');
         const status = $(this).data('status');
 
         $('.name').val(name);
         $('.latitude').val(latitude);
         $('.longitude').val(longitude);
+        $('.description').html(description);
         $('.status').val(status);
 
         $('.title-modal').html('Edit Tempat');
         $('.action').html('Update');
         $('.action').attr('data-type', 'update');
+
+        CKEDITOR.instances.ckeditor.setData(description);
+
+        $('.bootstrap-wysihtml5-insert-link-modal').remove();
+        $('.bootstrap-wysihtml5-insert-image-modal').remove();
 
         $('.modal').show();
     });
@@ -59,13 +67,22 @@ $(function () {
         $('.name').val('');
         $('.latitude').val('');
         $('.longitude').val('');
+        $('.description').val('');
         $('.status').val('');
+
+        $('.bootstrap-wysihtml5-insert-link-modal').remove();
+        $('.bootstrap-wysihtml5-insert-image-modal').remove();
 
         $('.modal').show();
     });
 
     $('body').on('click', '.action', function () {
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
+    
         const formData = $('#form-place').serialize();
+
         if ($(this).data('type') == "update") {
             action(`/place/update/${id}`, formData);
         }else{
