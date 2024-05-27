@@ -39,19 +39,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-place">
-                        
+                    <form id="form-place" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label class="form-label">Nama</label>
-                            <input type="text" class="form-control name" name="name">
+                            <input type="text" class="form-control name" name="name" placeholder="Masukkan Nama Tempat...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Latitude</label>
-                            <input type="text" class="form-control latitude" name="latitude">
+                            <input type="text" class="form-control latitude" name="latitude" placeholder="Masukkan Latitude...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Longitude</label>
-                            <input type="text" class="form-control longitude" name="longitude">
+                            <input type="text" class="form-control longitude" name="longitude" placeholder="Masukkan Longitude...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Deskripsi</label>
@@ -60,16 +60,21 @@
                         <div class="form-group">
                             <label class="form-label">Status</label>
                             <select name="status" id="" class="form-control status">
+                                <option selected disabled>Pilih Status</option>
                                 <option value="1">Ready</option>
                                 <option value="2">Booked</option>
                                 <option value="3">Closed</option>
                             </select>
                         </div>
+                        <hr>
+                        <h4><b>Tambahkan Detail Gambar</b></h4>
+                        <div class="detail"></div>
+                        <button type="button" class="btn mt-2 btn-sm btn-primary add-detail">Tambah <i class="fa fa-image ml-1"></i></button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="action btn btn-primary" data-type="">...</button>
-                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="action btn btn-success btn-md" data-type="">...</button>
+                    <button type="button" class="btn btn-secondary close-modal btn-md" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

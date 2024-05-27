@@ -23,7 +23,7 @@ $(function () {
                 type: 'GET',
                 success: function (res) {
                     if (res.code == 200) {
-                        swal("Berhasil", "Data berhasil dihapus!");
+                        toast("Berhasil dihapus!");
                         table.draw();
                     } else {
                         swal("Oops", res.message, "error");
@@ -33,7 +33,34 @@ $(function () {
         });
     });
 
+    $('body').on('click', '.add-detail', function () {
+        let html = `<div class="mt-2 list-detail">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-1" style="width:40px">
+                                    <button type="button" class="delete-detail btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="file" name="image[]" class="form-control image-input">
+                                    </div>
+                                    <div class="preview-container">
+                                        <img class="preview-image" src="/back-office/img/blank.jpg" alt="Preview Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <textarea name="image_description[]" id="" class="form-control" placeholder="Masukkan keterangan..." rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+        $('.detail').append(html);
+    });
+
     $('body').on('click', '.edit', function () {
+        $('.detail').html('');
         id = $(this).data('id');
         const name = $(this).data('name');
         const latitude = $(this).data('latitude');
@@ -57,9 +84,12 @@ $(function () {
         $('.bootstrap-wysihtml5-insert-image-modal').remove();
 
         $('.modal').show();
+
+        getImage(id);
     });
 
     $('body').on('click', '.add', function () {
+        $('.detail').html('');
         $('.title-modal').html('Tambah Tempat');
         $('.action').html('Tambah');
         $('.action').attr('data-type', 'store');
@@ -78,12 +108,17 @@ $(function () {
         $('.modal').show();
     });
 
+    $('body').on('click', '.delete-detail', function () {
+        $(this).closest('.list-detail').remove();
+    });
+
     $('body').on('click', '.action', function () {
         for (instance in CKEDITOR.instances) {
             CKEDITOR.instances[instance].updateElement();
         }
     
-        const formData = $('#form-place').serialize();
+        const form = $('#form-place')[0]; // Get the first element of the jQuery object
+        let formData = new FormData(form);
 
         if ($(this).data('type') == "update") {
             action(`/place/update/${id}`, formData);
@@ -98,6 +133,8 @@ $(function () {
             url: url,
             type: 'POST',
             data: data,
+            processData: false,
+            contentType: false,
             success: function (res) {
                 if (res.code == 200) {
                     toast("Berhasil");
@@ -112,4 +149,56 @@ $(function () {
             }
         });
     }
+
+    function getImage(id)
+    {
+        $.ajax({
+            url: `/place/get-image/${id}`,
+            type: 'GET',
+            success: function (res) {
+                let html = "";
+                $.each(res, function(k, v){
+                    html += `<div class="mt-2 list-detail">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-1" style="width:40px">
+                                            <button type="button" class="delete-detail btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="hidden" name="old_image[]" class="form-control old_image" value="${v.images}">
+                                                <input type="file" name="image[]" class="form-control image-input">
+                                            </div>
+                                            <div class="preview-container">
+                                                <img class="preview-image" src="${v.images}" alt="Preview Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <textarea name="image_description[]" id="" class="form-control" placeholder="Masukkan keterangan..." rows="10">${v.description}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                });
+                $('.detail').html(html);
+            },
+            error: function(xhr, status, error) {
+                swal("Error", "Oops: " + error, "error");
+            }
+        });
+    }
+
+    $('body').on('change', '.image-input', function(){
+        let elem = $(this);
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                elem.closest('.col-md-5').find('.preview-container').html('<img class="preview-image" src="' + e.target.result + '" alt="Preview Image">');
+                elem.closest('.col-md-5').find('.old_image').remove();
+            }
+            reader.readAsDataURL(this.files[0]); // convert to base64 string
+        }
+    });
 });

@@ -5,28 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Dashboard</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/fonts/font-awesome.min.css">
-  <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/fonts/ionicons.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('back-office') }}/dist/css/skins/_all-skins.min.css">
   <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 <style>
   .table.dataTable.no-footer{
@@ -38,12 +24,27 @@
     margin: auto;
   }
 
-  .modal-full .modal-content {
-    height: auto;
+  .modal-full .modal-body {
+    max-height: 700px;
+    overflow-y: scroll
   }
 
   .mt-2{
     margin-top: 20px !important;
+  }
+
+  .ml-1{
+    margin-left: 10px !important;
+  }
+
+  .detail{
+    border: 2px dashed #dfe4ea
+  }
+
+  .preview-image {
+      max-height: 200px;
+      margin-bottom: 20px;
+      border-radius: 10px;
   }
 </style>
 <body class="hold-transition skin-purple sidebar-mini">

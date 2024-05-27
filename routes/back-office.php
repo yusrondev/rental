@@ -16,6 +16,7 @@ Route::middleware(['auth'])->group(function () {
 
     // place
     Route::get('/place', [PlaceController::class, 'index'])->name('place');
+    Route::get('/place/get-image/{id}', [PlaceController::class, 'getImage']);
     Route::get('/place/delete/{id}', [PlaceController::class, 'delete'])->name('place.delete');
     Route::post('/place/update/{id}', [PlaceController::class, 'update'])->name('place.update');
     Route::post('/place/store', [PlaceController::class, 'store'])->name('place.store');
