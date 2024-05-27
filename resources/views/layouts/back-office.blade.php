@@ -94,14 +94,14 @@
                 <img src="/back-office/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  {{Auth::user()->name}} - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{Auth::user()->name}}
+                  <small>Daftar sejak {{date('d-m-Y', strtotime(Auth::user()->created_at))}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
                 </div>
                 <div class="pull-right">
                   <a href="{{route('actionlogout')}}" class="btn btn-default btn-flat">Sign out</a>
@@ -130,16 +130,6 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
