@@ -217,8 +217,19 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
   });
+  
   $('body').on('click', '.close-modal', function () {
       $('.modal').hide();
+  });
+
+  let currentUrl = window.location.href;
+
+  $('li a').each(function() {
+      let linkUrl = $(this).attr('href');
+      if (currentUrl == linkUrl) {
+        $(this).closest('li').addClass('active');
+        $(this).parents().find('.treeview').addClass('active');
+      }
   });
 </script>
 @stack('js')
