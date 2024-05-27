@@ -3,12 +3,22 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BackOffice\HomeController;
+use App\Http\Controllers\BackOffice\PlaceController;
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
-Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
-Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout');
+
+    // place
+    Route::get('/place', [PlaceController::class, 'index'])->name('place');
+    Route::get('/place/delete/{id}', [PlaceController::class, 'delete'])->name('place.delete');
+    Route::post('/place/update/{id}', [PlaceController::class, 'update'])->name('place.update');
+    Route::post('/place/store', [PlaceController::class, 'store'])->name('place.store');
+});
 
 //REGISTER
 Route::get('register', [RegisterController::class, 'register'])->name('register');
