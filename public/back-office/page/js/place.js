@@ -3,7 +3,7 @@ $(function () {
     const table = $('.table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: placeRoute,
+        ajax: '/place',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'name', name: 'name' },

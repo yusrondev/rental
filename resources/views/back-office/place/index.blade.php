@@ -5,8 +5,7 @@
 
 @section('content')
 <div class="box-header with-border">
-    <h3 class="box-title">Tempat <button type="button" class="btn btn-xs btn-success add"><i class="fa fa-plus"></i></button></h3>
-
+    <h3 class="box-title">Data Tempat <button type="button" class="btn btn-xs btn-success add"><i class="fa fa-plus"></i></button></h3>
     <div class="box-tools pull-right">
         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
             <i class="fa fa-minus"></i></button>
@@ -74,8 +73,5 @@
 @endsection
 
 @push('js')
-<script>
-    const placeRoute = "{{ route('place') }}";
-</script>
 <script src="{{ asset('back-office/page/js/place.js') }}"></script>
 @endpush

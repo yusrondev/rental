@@ -144,6 +144,9 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('/place') }}"><i class="fa fa-circle-o"></i> Tempat</a></li>
           </ul>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('/rating') }}"><i class="fa fa-circle-o"></i> Rating</a></li>
+          </ul>
         </li>
       </ul>
     </section>

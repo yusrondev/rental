@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BackOffice\HomeController;
 use App\Http\Controllers\BackOffice\PlaceController;
+use App\Http\Controllers\BackOffice\RatingController;
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::get('/login', [LoginController::class, 'login']);
@@ -18,6 +19,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/place/delete/{id}', [PlaceController::class, 'delete'])->name('place.delete');
     Route::post('/place/update/{id}', [PlaceController::class, 'update'])->name('place.update');
     Route::post('/place/store', [PlaceController::class, 'store'])->name('place.store');
+
+    // rating
+    Route::get('/rating', [RatingController::class, 'index']);
 });
 
 //REGISTER
