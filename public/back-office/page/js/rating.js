@@ -7,7 +7,7 @@ $(function () {
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'user', name: 'user' },
             { data: 'place', name: 'place' },
-            { data: 'rating', name: 'rating' },
+            { data: 'rating_star', name: 'rating_star' },
         ]
     });
 });

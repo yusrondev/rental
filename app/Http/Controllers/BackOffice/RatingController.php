@@ -27,7 +27,14 @@ class RatingController extends Controller
                 ->addColumn('user', function($row){
                     return @$row->user->name;
                 })
-                ->rawColumns(['place', 'user', 'action'])
+                ->addColumn('rating_star', function($row){
+                    $html = "";
+                    for ($i=0; $i < $row->rating ; $i++) { 
+                        $html .= '<i class="fa fa-star" style="margin:2px;color:#fed330;font-size:15px" aria-hidden="true"></i>';
+                    }
+                    return $html;
+                })
+                ->rawColumns(['place', 'user', 'rating_star', 'action'])
                 ->make(true);
         }
 
