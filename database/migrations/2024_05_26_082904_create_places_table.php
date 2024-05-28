@@ -19,6 +19,7 @@ class CreatePlacesTable extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->text('description')->nullable();
+            $table->integer('price')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

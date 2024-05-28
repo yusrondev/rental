@@ -12,6 +12,7 @@ $(function () {
             { data: 'latitude', name: 'latitude' },
             { data: 'longitude', name: 'longitude' },
             { data: 'description_place', name: 'description_place' },
+            { data: 'harga', name: 'harga' },
             { data: 'type_status', name: 'type_status' },
             { data: 'action', name: 'action' },
         ]

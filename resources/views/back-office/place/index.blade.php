@@ -22,6 +22,7 @@
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Deskripsi</th>
+                <th>Harga</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -56,6 +57,10 @@
                         <div class="form-group">
                             <label class="form-label">Deskripsi</label>
                             <textarea name="description" id="ckeditor" class="description" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Harga</label>
+                            <input type="text" class="form-control price dengan-rupiah" name="price" placeholder="Masukkan Harga...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>

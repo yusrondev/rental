@@ -33,7 +33,10 @@ class PlaceController extends Controller
                 ->addColumn('description_place', function ($row) {
                     return $row->description;
                 })
-                ->rawColumns(['type_status', 'description_place', 'action'])
+                ->addColumn('harga', function ($row) {
+                    return "Rp ".str_replace(",", ".", number_format($row->price));
+                })
+                ->rawColumns(['type_status', 'description_place', 'harga', 'action'])
                 ->make(true);
         }
         return view('back-office/place/index');
@@ -62,6 +65,10 @@ class PlaceController extends Controller
             if (!is_writable($storagePath)) {
                 throw new \Exception('Storage directory is not writable');
             }
+
+            $request->merge([
+                'price' => preg_replace('/[^\d]/', '', $request->price)
+            ]);
 
             $data = $request->except(['image', 'image_description']);
 
@@ -122,6 +129,11 @@ class PlaceController extends Controller
     {
         try {
             $place = Place::where('id', $id)->first();
+
+            $request->merge([
+                'price' => preg_replace('/[^\d]/', '', $request->price)
+            ]);
+            
             // Assuming you have fields like 'name', 'address', etc. in your Place model
             $place->update($request->all());
 

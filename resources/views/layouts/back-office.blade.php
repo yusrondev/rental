@@ -228,6 +228,7 @@
 <script src="{{ asset("back-office") }}/dist/js/demo.js"></script>
 <script src="{{ asset("back-office") }}/ckeditor/ckeditor.js"></script>
 <script src="{{ asset("global") }}/js/swal-helper.js"></script>
+<script src="{{ asset("global") }}/js/rupiah.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script>
