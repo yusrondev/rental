@@ -1,4 +1,5 @@
 $(function () {
+    CKEDITOR.replace('ckeditor');
     let id = "";
     let flag_type = "";
     const table = $('.table').DataTable({

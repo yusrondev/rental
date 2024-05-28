@@ -250,8 +250,6 @@
         $(this).parents().find('.treeview').addClass('active');
       }
   });
-
-  CKEDITOR.replace('ckeditor')
 </script>
 
 @stack('js')
