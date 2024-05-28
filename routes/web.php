@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 include __DIR__.'/back-office.php';
+include __DIR__.'/frontend.php';

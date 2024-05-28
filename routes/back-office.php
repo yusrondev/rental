@@ -6,7 +6,7 @@ use App\Http\Controllers\BackOffice\HomeController;
 use App\Http\Controllers\BackOffice\PlaceController;
 use App\Http\Controllers\BackOffice\RatingController;
 
-Route::get('/', [LoginController::class, 'login'])->name('login');
+// Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
 
