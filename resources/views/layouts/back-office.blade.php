@@ -126,7 +126,7 @@
                   {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
                 </div>
                 <div class="pull-right">
-                  <a href="{{route('actionlogout')}}" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{route('actionlogout')}}" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
             </ul>
@@ -164,10 +164,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('/place') }}"><i class="fa fa-circle-o"></i> Tempat</a></li>
+            <li><a href="{{ url('/admin/place') }}"><i class="fa fa-circle-o"></i> Tempat</a></li>
           </ul>
           <ul class="treeview-menu">
-            <li><a href="{{ url('/rating') }}"><i class="fa fa-circle-o"></i> Rating</a></li>
+            <li><a href="{{ url('/admin/rating') }}"><i class="fa fa-circle-o"></i> Rating</a></li>
           </ul>
         </li>
       </ul>

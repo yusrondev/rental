@@ -1263,7 +1263,7 @@ Shop Page Style
 }
 
 .trending-box .item .down-content a {
-  position: absolute;
+  /* position: absolute; */
   display: inline-block;
   text-align: center;
   line-height: 40px;

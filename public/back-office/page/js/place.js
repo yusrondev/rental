@@ -5,7 +5,7 @@ $(function () {
     const table = $('.table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/place',
+        ajax: '/admin/place',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'name', name: 'name' },
@@ -22,7 +22,7 @@ $(function () {
         const id = $(this).data('id');
         swalConfirm("hapus", function () {
             $.ajax({
-                url: `/place/delete/${id}`,
+                url: `/admin/place/delete/${id}`,
                 type: 'GET',
                 success: function (res) {
                     if (res.code == 200) {
@@ -73,12 +73,15 @@ $(function () {
         const longitude = $(this).data('longitude');
         const description = $(this).data('description');
         const status = $(this).data('status');
+        const price = $(this).data('price');
 
         $('.name').val(name);
         $('.latitude').val(latitude);
         $('.longitude').val(longitude);
         $('.description').html(description);
         $('.status').val(status);
+        $('.price').val(price);
+        $('.price').trigger('keyup');
 
         $('.title-modal').html('Edit Tempat');
         $('.action').html('Update');
@@ -129,9 +132,9 @@ $(function () {
         let formData = new FormData(form);
 
         if (flag_type == "update") {
-            action(`/place/update/${id}`, formData);
+            action(`/admin/place/update/${id}`, formData);
         }else{
-            action(`/place/store`, formData);
+            action(`/admin/place/store`, formData);
         }
     });
 
@@ -161,7 +164,7 @@ $(function () {
     function getImage(id)
     {
         $.ajax({
-            url: `/place/get-image/${id}`,
+            url: `/admin/place/get-image/${id}`,
             type: 'GET',
             success: function (res) {
                 let html = "";
@@ -178,7 +181,7 @@ $(function () {
                                                 <input type="file" name="image[]" class="form-control image-input">
                                             </div>
                                             <div class="preview-container">
-                                                <img class="preview-image" src="${v.images}" alt="Preview Image">
+                                                <img class="preview-image" src="/${v.images}" alt="Preview Image">
                                             </div>
                                         </div>
                                         <div class="col-md-6">

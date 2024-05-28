@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/owl.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    @stack('css')
 <!--
 
 TemplateMo 589 lugx gaming
@@ -29,6 +30,8 @@ https://templatemo.com/tm-589-lugx-gaming
   </head>
 
 <body>
+
+  @stack('style')
 
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
@@ -57,9 +60,9 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="/" class="active">Beranda</a></li>
-                      <li><a href="#">Tempat</a></li>
-                      <li><a href="#">Kontak Kami</a></li>
+                      <li><a href="/" class="@yield('nav-item-beranda')">Beranda</a></li>
+                      <li><a href="/product" class="@yield('nav-item-tempat')">Tempat</a></li>
+                      {{-- <li><a href="#" class="@yield('nav-item-kotak')">Kontak Kami</a></li> --}}
                       <li><a href="#">Masuk</a></li>
                   </ul>   
                     <a class='menu-trigger'>
@@ -91,6 +94,7 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="{{ asset('frontend') }}/assets/js/owl-carousel.js"></script>
   <script src="{{ asset('frontend') }}/assets/js/counter.js"></script>
   <script src="{{ asset('frontend') }}/assets/js/custom.js"></script>
+  <script src="{{ asset("global") }}/js/location.js"></script>
   @stack('js')
   </body>
 </html>

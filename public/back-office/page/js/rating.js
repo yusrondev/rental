@@ -2,7 +2,7 @@ $(function () {
     const table = $('.table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/rating',
+        ajax: '/admin/rating',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'user', name: 'user' },

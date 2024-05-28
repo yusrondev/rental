@@ -27,4 +27,12 @@ class FrontendController extends Controller
             'detail' => $detail,
         ]);
     }
+
+    public function product()
+    {
+        $data = Place::with('placeDetails')->orderBy('id', 'desc')->simplePaginate(8);
+        return view('frontend/product', [
+            'data' => $data
+        ]);
+    }
 }

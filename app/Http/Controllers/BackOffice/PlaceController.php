@@ -25,7 +25,7 @@ class PlaceController extends Controller
                     return $type[$row->status];
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a data-id="' . $row->id . '" data-name="' . $row->name . '" data-latitude="' . $row->latitude . '" data-longitude="' . $row->longitude . '" data-status="' . $row->status . '" data-description="' . $row->description . '" href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> ';
+                    $actionBtn = '<a data-id="' . $row->id . '" data-name="' . $row->name . '" data-latitude="' . $row->latitude . '" data-longitude="' . $row->longitude . '" data-status="' . $row->status . '" data-description="' . $row->description . '" data-price="' . $row->price . '" href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> ';
                     $actionBtn .= '<a href="javascript:void(0)" data-id="' . $row->id . '" class="delete btn btn-danger btn-sm">Delete</a>';
 
                     return $actionBtn;

@@ -1,5 +1,6 @@
 
 @extends('layouts.frontend')
+@section('nav-item-beranda', 'active')
 @section('content')
   <div class="main-banner">
     <div class="container">
@@ -63,7 +64,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">Lihat Semua</a>
+            <a href="{{ url('/product') }}">Lihat Semua</a>
           </div>
         </div>
         @foreach ($terbaru as $itemterbaru)    
@@ -96,7 +97,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">Lihat Semua</a>
+            <a href="{{ url('/product') }}">Lihat Semua</a>
           </div>
         </div>
         @foreach ($termurah as $itemtermurah)    
@@ -129,7 +130,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">Lihat Semua</a>
+            <a href="{{ url('/product') }}">Lihat Semua</a>
           </div>
         </div>
         @foreach ($termahal as $itemtermahal)    
@@ -162,7 +163,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">Lihat Semua</a>
+            <a href="{{ url('/product') }}">Lihat Semua</a>
           </div>
         </div>
         {{-- <div class="col-lg-2 col-md-6 col-sm-6">
@@ -194,7 +195,7 @@
                 </div>
                 <p>Lorem ipsum dolor consectetur adipiscing, sed do eiusmod tempor incididunt.</p>
                 <div class="main-button">
-                  <a href="shop.html">Shop Now</a>
+                  <a href="{{ url('/product') }}">Shop Now</a>
                 </div>
               </div>
             </div>

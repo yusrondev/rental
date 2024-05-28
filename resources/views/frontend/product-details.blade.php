@@ -1,12 +1,26 @@
 @extends('layouts.frontend')
 @section('content')
-
+@section('nav-item-tempat', 'active')
+@push('css')
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+@endpush
+@push('style')
+    <style>
+      #map { 
+        height: 500px;
+        z-index: 1;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.15) !important
+      }
+    </style>
+@endpush
+    <div id="location"></div>
   <div class="page-heading header-text">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <h3>{{ $detail->name }}</h3>
-          <span class="breadcrumb"><a href="#">Beranda</a>  >  <a href="#">Tempat</a>  >  {{ $detail->name }}</span>
+          <span class="breadcrumb"><a href="/">Beranda</a>  >  <a href="#">Tempat</a>  >  {{ $detail->name }}</span>
         </div>
       </div>
     </div>
@@ -15,12 +29,12 @@
   <div class="single-product section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="left-image">
-            <img src="{{ asset($detail->placeDetails[0]->images) }}" alt="">
+            <div id="map"></div>
           </div>
         </div>
-        <div class="col-lg-6 align-self-center">
+        <div class="col-lg-4 align-self-center">
           <h4>{{ $detail->name }}</h4>
           <span class="price">{{ "Rp ".str_replace(",", ".", number_format($detail->price)) }}</span>
           {!! $detail->description !!}
@@ -82,3 +96,69 @@
     </div>
   </div>
 @endsection
+@push('js')
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+  <script>
+    let name = "{{ $detail->name }}";
+    let lat = {{ $detail->latitude }};
+    let long = {{ $detail->longitude }};
+    let map = L.map('map').setView([lat, long], 13);
+
+    let user_latitude = localStorage.getItem("latitude");
+    let user_longitude = localStorage.getItem("longitude");
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    let waypoints = [];
+
+    let bounds = new L.LatLngBounds();
+
+    let json_latlong = [
+      {
+        "label" : `Lokasi <b>${name}</b> ada di sini!`,
+        "lat": lat,
+        "lng": long
+      },
+      {
+        "label" : "Lokasi Anda",
+        "lat": user_latitude,
+        "lng": user_longitude
+      }
+    ];
+
+    json_latlong.forEach(function(markerData) {
+        let lat = parseFloat(markerData.lat);
+        let lng = parseFloat(markerData.lng);
+        bounds.extend([lat, lng]);
+        let marker = L.marker([lat, lng]).addTo(map);
+
+        marker.bindTooltip(markerData.label, {
+            permanent: true,
+            direction: 'top'
+        }).openTooltip();
+
+        waypoints.push(L.latLng(lat, lng));
+    });
+
+    map.fitBounds(bounds);
+
+    let control = L.Routing.control({
+        waypoints: waypoints,
+        routeWhileDragging: true,
+        vehicle: 'car',
+        lineOptions: {
+            styles: [{
+                color: '#00a8ff',
+                weight: 4
+            }]
+        }
+    }).addTo(map);
+
+    $('.leaflet-routing-container').remove();
+
+  </script>
+@endpush
