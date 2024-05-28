@@ -1,5 +1,6 @@
 $(function () {
     let id = "";
+    let flag_type = "";
     const table = $('.table').DataTable({
         processing: true,
         serverSide: true,
@@ -62,6 +63,7 @@ $(function () {
     $('body').on('click', '.edit', function () {
         $('.detail').html('');
         id = $(this).data('id');
+        flag_type = "update";
         const name = $(this).data('name');
         const latitude = $(this).data('latitude');
         const longitude = $(this).data('longitude');
@@ -89,6 +91,7 @@ $(function () {
     });
 
     $('body').on('click', '.add', function () {
+        flag_type = "store";
         $('.detail').html('');
         $('.title-modal').html('Tambah Tempat');
         $('.action').html('Tambah');
@@ -116,11 +119,11 @@ $(function () {
         for (instance in CKEDITOR.instances) {
             CKEDITOR.instances[instance].updateElement();
         }
-    
+
         const form = $('#form-place')[0]; // Get the first element of the jQuery object
         let formData = new FormData(form);
 
-        if ($(this).data('type') == "update") {
+        if (flag_type == "update") {
             action(`/place/update/${id}`, formData);
         }else{
             action(`/place/store`, formData);
