@@ -46,6 +46,10 @@
       margin-bottom: 20px;
       border-radius: 10px;
   }
+
+  .alert-cover{
+    display: none
+  }
 </style>
 <body class="hold-transition skin-purple sidebar-mini">
 <!-- Site wrapper -->

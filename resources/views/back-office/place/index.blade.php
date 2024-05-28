@@ -73,6 +73,9 @@
                         </div>
                         <hr>
                         <h4><b>Tambahkan Detail Gambar</b></h4>
+                        <div class="alert alert-info alert-cover">
+                            <i class="fa fa-info-circle"></i> Gambar pertama akan <strong>menjadi cover</strong>
+                        </div>
                         <div class="detail"></div>
                         <button type="button" class="btn mt-2 btn-sm btn-primary add-detail">Tambah <i class="fa fa-image ml-1"></i></button>
                     </form>

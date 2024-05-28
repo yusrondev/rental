@@ -60,9 +60,11 @@ $(function () {
                         </div>
                     </div>`;
         $('.detail').append(html);
+        $('.alert-cover').show();
     });
 
     $('body').on('click', '.edit', function () {
+        $('.alert-cover').hide();
         $('.detail').html('');
         id = $(this).data('id');
         flag_type = "update";
@@ -94,6 +96,7 @@ $(function () {
 
     $('body').on('click', '.add', function () {
         flag_type = "store";
+        $('.alert-cover').hide();
         $('.detail').html('');
         $('.title-modal').html('Tambah Tempat');
         $('.action').html('Tambah');
@@ -187,6 +190,11 @@ $(function () {
                                 </div>
                             </div>`;
                 });
+
+                if (res.length > 0) {
+                    $('.alert-cover').show();
+                }
+
                 $('.detail').html(html);
             },
             error: function(xhr, status, error) {
