@@ -76,7 +76,7 @@
                         </div>
                         <div class="down-content">
                         <h4>{{ $itemterbaru->name }}</h4>
-                        <span class="category">{!! $itemterbaru->description !!}</span>
+                        <span class="category">{!! substr($itemterbaru->description, 0, 100) !!}...</span>
                         <a href="{{ url('/detail/'.$itemterbaru->id) }}" class="mt-3"><i class="fa fa-shopping-bag"></i></a>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="down-content">
                         <h4>{{ $itemtermurah->name }}</h4>
-                        <span class="category">{!! $itemtermurah->description !!}</span>
+                        <span class="category">{!! substr($itemtermurah->description, 0, 100) !!}...</span>
                         <a href="{{ url('/detail/'.$itemtermurah->id) }}" class="mt-3"><i class="fa fa-shopping-bag"></i></a>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                         </div>
                         <div class="down-content">
                         <h4>{{ $itemtermahal->name }}</h4>
-                        <span class="category">{!! $itemtermahal->description !!}</span>
+                        <span class="category">{!! substr($itemtermahal->description, 0, 100) !!}...</span>
                         <a href="{{ url('/detail/'.$itemtermahal->id) }}" class="mt-3"><i class="fa fa-shopping-bag"></i></a>
                     </div>
                 </div>

@@ -79,9 +79,9 @@
                           <div class="col-lg col-sm-6 col-xs-12">
                             <div class="item">
                               <div class="thumb">
-                                <a href="#"><img src="{{ asset($item->images) }}" alt=""></a>
-                              </div>
-                              <span>{{ $item->description }}</span>
+                                <a href="#"><img style="border-radius: 10px" src="{{ asset($item->images) }}" alt=""></a>
+                              </div><br>
+                              <span><i>{{ $item->description }}</i></span>
                             </div>
                           </div>
                         @endforeach
