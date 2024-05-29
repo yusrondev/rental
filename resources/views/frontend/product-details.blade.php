@@ -35,11 +35,29 @@
           </div>
         </div>
         <div class="col-lg-4 align-self-center">
+          @if(session('success'))
+          <div class="alert alert-success">
+              {{session('success')}}
+          </div>
+          @endif
+          @if(session('error'))
+          <div class="alert alert-danger">
+              {{session('error')}}
+          </div>
+          @endif
           <h4>{{ $detail->name }}</h4>
           <span class="price">{{ "Rp ".str_replace(",", ".", number_format($detail->price)) }}</span>
           {!! $detail->description !!}
-          <form id="qty" action="#">
-            <button type="submit"><i class="fa fa-shopping-bag"></i> Tambah ke keranjang</button>
+          <form action="/transaction/store" method="POST" id="qty" action="#">
+            @csrf
+            <input type="hidden" name="id" value="{{ $detail->id }}">
+            <input type="hidden" name="grand_total" value="{{ $detail->price }}">
+            @if (Auth::check())
+              <button type="submit"><i class="fa fa-shopping-bag"></i> Tambah ke keranjang</button>
+              @else
+              <button disabled style="cursor: not-allowed" type="submit"><i class="fa fa-shopping-bag"></i> Tambah ke keranjang</button>
+              <br><small><i>Silahkan masuk terlebih dahulu untuk melanjutkan</i></small>
+            @endif
           </form>
           <ul>
             <li><span>Diposting Pada:</span> {{ date('d-m-Y', strtotime($detail->created_at)) }}</li>

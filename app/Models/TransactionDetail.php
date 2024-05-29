@@ -10,13 +10,14 @@ class TransactionDetail extends Model
     use HasFactory;
     protected $fillable = [
         'transaction_id',
-        'product_id',
+        'place_id',
         'qty',
-        'sub_total'
+        'sub_total',
+        'status'
     ];
 
-    public function product()
+    public function place()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(Place::class, 'id', 'place_id');
     }
 }

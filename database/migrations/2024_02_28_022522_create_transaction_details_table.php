@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
             $table->integer('transaction_id');
-            $table->integer('product_id');
+            $table->integer('place_id');
             $table->integer('qty');
             $table->decimal('sub_total', 8, 2);
+            $table->integer('status')->default(0); // 0 pending, 1 process, 2 success
             $table->timestamps();
         });
     }
