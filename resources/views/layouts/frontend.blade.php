@@ -62,8 +62,12 @@ https://templatemo.com/tm-589-lugx-gaming
                     <ul class="nav">
                       <li><a href="/" class="@yield('nav-item-beranda')">Beranda</a></li>
                       <li><a href="/product" class="@yield('nav-item-tempat')">Tempat</a></li>
-                      {{-- <li><a href="#" class="@yield('nav-item-kotak')">Kontak Kami</a></li> --}}
-                      <li><a href="#">Masuk</a></li>
+                      @if (Auth::check())
+                          {{-- <li><a href="/keranjang" class="@yield('nav-item-keranjang')">Keranjang</a></li> --}}
+                          <li><a href="{{route('actionlogout')}}"><i class="fa fa-user" style="font-size: 12px;margin-right:5px"></i> {{ Auth::user()->name }} │ Keluar</a></li>
+                          @else
+                          <li><a href="/login">Masuk</a></li>
+                      @endif
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>

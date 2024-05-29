@@ -26,16 +26,23 @@ class LoginController extends Controller
         ];
 
         if (Auth::Attempt($data)) {
-            return redirect('/admin/home');
+            if (Auth::user()->role == 1) {
+                return redirect('/admin/home');
+            }
+
+            if (Auth::user()->role == 0) {
+                return redirect('/');
+            }
         }else{
             Session::flash('error', 'Email atau Password Salah');
-            return redirect('/admin/login');
+            return redirect()->back();
         }
     }
 
     public function actionlogout()
     {
+        $role = Auth::user()->role == 0 ? 0 : 1;
         Auth::logout();
-        return redirect('/admin/login');
+        return ($role == 0) ? redirect('/') : redirect('/admin/login');
     }
 }

@@ -6,6 +6,10 @@ use App\Http\Controllers\BackOffice\HomeController;
 use App\Http\Controllers\BackOffice\PlaceController;
 use App\Http\Controllers\BackOffice\RatingController;
 
+Route::get('/admin', function(){
+    return redirect('/admin/login');
+});
+
 Route::prefix('admin')->group(function () {
 
     Route::get('/login', [LoginController::class, 'login']);
