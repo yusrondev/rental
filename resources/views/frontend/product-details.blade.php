@@ -48,7 +48,7 @@
           <h4>{{ $detail->name }}</h4>
           <span class="price">{{ "Rp ".str_replace(",", ".", number_format($detail->price)) }}</span>
           {!! $detail->description !!}
-          <form action="/transaction/store" method="POST" id="qty" action="#">
+          <form action="/cart/store" method="POST" id="qty" action="#">
             @csrf
             <input type="hidden" name="id" value="{{ $detail->id }}">
             <input type="hidden" name="grand_total" value="{{ $detail->price }}">

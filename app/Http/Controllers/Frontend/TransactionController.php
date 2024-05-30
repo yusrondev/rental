@@ -17,37 +17,29 @@ class TransactionController extends Controller
     }
 
     public function store(Request $request){
-        $id = $request->id;
-
-        // memastikan tidak ada duplikasi data
-        $check = Transaction::whereHas('transactionDetail', function($q) use ($id){
-            $q->where('place_id', $id)->where('status', 0);
-        })->where('user_id', Auth::user()->id)->get();
-
-        if ($check->count() > 0) {
-            Session::flash('error', 'Tempat ini sudah ada dalam keranjang!');
-
-            return redirect()->back();
+        $grand_total = 0;
+        foreach ($request->price as $k => $v) {
+            $grand_total += $v;
         }
 
         $transaction = Transaction::create([
             'code' => self::generateRandomString(5).date('His'), 
             'description' => "", 
-            'grand_total' => $request->grand_total, 
+            'grand_total' => $grand_total, 
             'status' => 0,
             'user_id' => Auth::user()->id,
         ]);
 
-        TransactionDetail::create([
-            'transaction_id' => $transaction->id,
-            'place_id' => $id,
-            'qty' => 1,
-            'sub_total' => $request->grand_total,
-            'status' => 0,
-        ]);
-
-        Session::flash('success', 'Berhasil ditambahkan ke keranjang!');
-
+        foreach ($request->place_id as $key => $value) {
+            TransactionDetail::create([
+                'transaction_id' => $transaction->id,
+                'place_id' => $value,
+                'qty' => 1,
+                'sub_total' => $request->price[$key],
+                'status' => 0,
+            ]);
+        }
+        
         return redirect()->back();
     }
 

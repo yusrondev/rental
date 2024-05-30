@@ -63,7 +63,7 @@ https://templatemo.com/tm-589-lugx-gaming
                       <li><a href="/" class="@yield('nav-item-beranda')">Beranda</a></li>
                       <li><a href="/product" class="@yield('nav-item-tempat')">Tempat</a></li>
                       @if (Auth::check())
-                          <li><a href="/transaction" class="@yield('nav-item-keranjang')">Keranjang</a></li>
+                          <li><a href="/cart" class="@yield('nav-item-keranjang')">Keranjang</a></li>
                           <li><a href="{{route('actionlogout')}}"><i class="fa fa-user" style="font-size: 12px;margin-right:5px"></i> {{ Auth::user()->name }} │ Keluar</a></li>
                           @else
                           <li><a href="/login">Masuk</a></li>
@@ -99,6 +99,8 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="{{ asset('frontend') }}/assets/js/counter.js"></script>
   <script src="{{ asset('frontend') }}/assets/js/custom.js"></script>
   <script src="{{ asset("global") }}/js/location.js"></script>
+  <script src="{{ asset('global/js/swal.js') }}"></script>
+  <script src="{{ asset("global") }}/js/swal-helper.js"></script>
   @stack('js')
   </body>
 </html>
