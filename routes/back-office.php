@@ -12,7 +12,7 @@ Route::get('/admin', function(){
 
 Route::prefix('admin')->group(function () {
 
-    Route::get('/login', [LoginController::class, 'login']);
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
     
     Route::middleware(['auth'])->group(function () {
