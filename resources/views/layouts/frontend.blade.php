@@ -101,6 +101,8 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="{{ asset("global") }}/js/location.js"></script>
   <script src="{{ asset('global/js/swal.js') }}"></script>
   <script src="{{ asset("global") }}/js/swal-helper.js"></script>
+
+  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="6ce72ad1-3f94-40ac-b5d8-4a54c8da8c67";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
   @stack('js')
   </body>
 </html>
