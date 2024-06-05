@@ -45,13 +45,43 @@
             </div>
           @endforeach
         </div>
-        <button type="submit" class="btn btn-success btn-block btn-md" style="float: right"><i class="fa fa-check"></i> Checkout</button>
+        <button type="submit" class="btn btn-success btn-block btn-md" style="float: right"> Checkout</button>
       </form>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <hr>
+      <h4>Belum dibayar</h4>
+      <table class="table table-striped table-responsive table-borederd">
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Grand Total</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($transaction as $item)
+              <tr>
+                <td>{{ $item->code }}</td>
+                <td>{{ "Rp ".str_replace(",", ".", number_format($item->grand_total)) }}</td>
+                <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
+                <td>
+                  <button data-id="{{ $item->id }}" data-total="{{ $item->grand_total }}" class="btn btn-sm btn-success bayar">Bayar</button>
+                  <button class="btn btn-sm btn-danger">Batal</button>
+                </td>
+              </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 @endsection
 
 @push('js')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
     <script>
       $('.delete-item').click(function(){
         let id = $(this).data('id');
@@ -63,6 +93,29 @@
             success:function(res){
               toast("Berhasil Hapus!");
               elem.parents().closest('.list-cart').remove();
+            }
+          });
+        });
+      });
+
+      $('.bayar').click(function(){
+        let id = $(this).data('id');
+        let total = $(this).data('total');
+        let elem = $(this);
+        swalConfirm('bayar', function(){
+          $.ajax({
+            url : `/payment`,
+            type : "POST",
+            data : {
+              id : id,
+              _token: $('meta[name="csrf-token"]').attr('content'),
+              gross_amount : total
+            },
+            success:function(res){
+              console.log(res);
+              window.snap.pay(res.snap_token);
+              // toast("Berhasil Hapus!");
+              // elem.parents().closest('.list-cart').remove();
             }
           });
         });

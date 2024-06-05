@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,8 +13,10 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function index(){
-        $data = Cart::with('cartDetail.place.placeDetails')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
-        return view('frontend/cart', ['data' => $data]);
+        $data = Cart::with('cartDetail.place.placeDetails')->where('user_id', Auth::user()->id)->where('status', 0)->orderBy('id', 'desc')->get();
+
+        $transaction = Transaction::where('user_id', Auth::user()->id)->where('status', 0)->get();
+        return view('frontend/cart', ['data' => $data, 'transaction' => $transaction]);
     }
 
     public function store(Request $request){
