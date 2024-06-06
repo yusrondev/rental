@@ -141,23 +141,37 @@
         let id = $(this).data('id');
         let total = $(this).data('total');
         let elem = $(this);
+        
         swalConfirm('bayar', function(){
-          $.ajax({
-            url : `/payment`,
-            type : "POST",
-            data : {
-              id : id,
-              _token: $('meta[name="csrf-token"]').attr('content'),
-              gross_amount : total
-            },
-            success:function(res){
-              console.log(res);
-              window.snap.pay(res.snap_token);
-              // toast("Berhasil Hapus!");
-              // elem.parents().closest('.list-cart').remove();
-            }
-          });
+            $.ajax({
+                url: `/payment`,
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    gross_amount: total
+                },
+                success: function(res){
+                    console.log(res);
+                    window.snap.pay(res.snap_token, {
+                        onSuccess: function(result){
+                            // Replace '/success' with your desired redirect URL
+                            window.location.href = '/cart';
+                        },
+                        onPending: function(result){
+                            // Handle pending status if necessary
+                        },
+                        onError: function(result){
+                            // Handle error status if necessary
+                        },
+                        onClose: function(){
+                            // Handle close action if necessary
+                        }
+                    });
+                }
+            });
         });
       });
+
     </script>
 @endpush
