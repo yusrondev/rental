@@ -70,8 +70,32 @@
                 <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                 <td>
                   <button data-id="{{ $item->id }}" data-total="{{ $item->grand_total }}" class="btn btn-sm btn-success bayar">Bayar</button>
-                  <button class="btn btn-sm btn-danger">Batal</button>
+                  <button data-id="{{ $item->id }}" class="btn btn-sm btn-danger batal">Batal</button>
                 </td>
+              </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <hr>
+      <h4>Sudah dibayar</h4>
+      <table class="table table-striped table-responsive table-borederd">
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Grand Total</th>
+            <th>Tanggal Bayar</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($transactiondone as $itemdone)
+              <tr>
+                <td>{{ $itemdone->code }}</td>
+                <td>{{ "Rp ".str_replace(",", ".", number_format($itemdone->grand_total)) }}</td>
+                <td>{{ date('d-m-Y H:i:s', strtotime($itemdone->updated_at)) }}</td>
               </tr>
           @endforeach
         </tbody>
@@ -93,6 +117,21 @@
             success:function(res){
               toast("Berhasil Hapus!");
               elem.parents().closest('.list-cart').remove();
+            }
+          });
+        });
+      });
+
+      $('.batal').click(function(){
+        let id = $(this).data('id');
+        let elem = $(this);
+        swalConfirm('cancel', function(){
+          $.ajax({
+            url : `/transaction/cancel/${id}`,
+            type : "GET",
+            success:function(res){
+              toast("Berhasil Dicancel!");
+              window.location.reload();
             }
           });
         });

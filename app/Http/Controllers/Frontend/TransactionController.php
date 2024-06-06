@@ -43,6 +43,10 @@ class TransactionController extends Controller
         return redirect()->back();
     }
 
+    public function cancel($id) {
+        return Transaction::where('id', $id)->update(['status' => 4]);
+    }
+
     public function generateRandomString($length = 10) {
         // Characters to be included in the random string
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

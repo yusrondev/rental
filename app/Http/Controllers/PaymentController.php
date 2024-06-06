@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 use App\Models\Payment;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -54,8 +55,6 @@ class PaymentController extends Controller
     public function notificationHandler(Request $request)
     {
         $notification = $request->input();
-        
-        dd($notification);
 
         $order_id = $notification['order_id'];
         $transaction_id = $notification['transaction_id'];
@@ -64,6 +63,10 @@ class PaymentController extends Controller
 
         $payment = Payment::where('order_id', $order_id)->first();
 
+        Transaction::where('id', $order_id)->update([
+            'status' => 2
+        ]);
+
         if ($payment) {
             $payment->update([
                 'transaction_id' => $transaction_id,
@@ -71,7 +74,7 @@ class PaymentController extends Controller
                 'fraud_status' => $fraud_status,
             ]);
         }
-
+        
         return response()->json(['message' => 'Notification received successfully']);
     }
 }
