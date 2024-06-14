@@ -21,34 +21,34 @@
   <div class="features">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <a href="#terbaru">
             <div class="item">
               <h4>Terbaru</h4>
             </div>
           </a>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <a href="#termurah">
             <div class="item">
               <h4>Termurah</h4>
             </div>
           </a>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <a href="#termahal">
             <div class="item">
               <h4>Termahal</h4>
             </div>
           </a>
         </div>
-        <div class="col-lg-3 col-md-6">
+        {{-- <div class="col-lg-3 col-md-6">
           <a href="#most-played">
             <div class="item">
               <h4>Paling Laris</h4>
             </div>
           </a>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
@@ -152,7 +152,7 @@
     </div>
   </div>
 
-  <div class="section most-played" id="most-played">
+  {{-- <div class="section most-played" id="most-played">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
@@ -168,5 +168,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 @endsection
