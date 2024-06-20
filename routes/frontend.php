@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\TransactionController;
@@ -18,3 +19,5 @@ Route::get('/cart/delete/{id}', [CartController::class, 'delete']);
 // transaction
 Route::post('/transaction/store', [TransactionController::class, 'store']);
 Route::get('/transaction/cancel/{id}', [TransactionController::class, 'cancel']);
+
+Route::post('register/action', [RegisterController::class, 'actionregister'])->name('actionregister');

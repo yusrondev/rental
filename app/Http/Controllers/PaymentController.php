@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 use App\Models\Payment;
+use App\Models\Place;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -66,6 +68,13 @@ class PaymentController extends Controller
         Transaction::where('id', $order_id)->update([
             'status' => 2
         ]);
+
+        $place = TransactionDetail::where('transaction_id', $order_id)->get();
+        foreach ($place as $key => $item) {
+            Place::where('id', $item->place_id)->update([
+                'status' => 2
+            ]);
+        }
 
         if ($payment) {
             $payment->update([
